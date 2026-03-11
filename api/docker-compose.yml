@@ -1,0 +1,45 @@
+services:
+  api:
+    build:
+      context: .
+      target: production
+    container_name: sphere-api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/sphere
+    depends_on:
+      postgres:
+        condition: service_healthy   # ← wait for postgres to be ready
+    networks:
+      - sphere_network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: sphere_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sphere
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data   # persist data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sphere_network
+
+networks:
+  sphere_network:
+    driver: bridge               # containers can talk to each other
+
+volumes:
+  postgres_data:                 # named volume = data survives container restarts
