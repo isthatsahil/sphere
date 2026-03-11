@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
-import type { Config } from "../types/config.js";
+import type { SERVER_Config } from "../types/config.js";
 
 dotenv.config();
 
-const config: Config = {
+const serverConfig: SERVER_Config = {
   port: Number(process.env.PORT) || 3000,
   nodeEnv: process.env.NODE_ENV || "development",
 };
 
-export default config;
+export default serverConfig;
