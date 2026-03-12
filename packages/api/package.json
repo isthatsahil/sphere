@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "@sphere/api",
   "version": "0.1.0",
   "main": "index.js",
   "type": "module",
@@ -24,6 +24,7 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "@sphere/shared": "*",
     "dotenv": "^17.3.1",
     "drizzle-orm": "^0.45.1",
     "express": "^5.2.1",
