@@ -5,12 +5,13 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client"],
+    "types": ["vite/client", "vite-plugin-svgr/client"],
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@sphere/shared": ["../shared/src/index.ts"],
-      "@sphere/shared/*": ["../shared/src/*"]
+      "@sphere/shared/*": ["../shared/src/*"],
+      "@/*": ["./src/*"]
     },
 
     /* Bundler mode */

@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
-
+import tailwindcss from '@tailwindcss/vite'
+import path from 'path'
+import svgr from 'vite-plugin-svgr'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -10,12 +12,15 @@ export default defineConfig({
         plugins: [['babel-plugin-react-compiler']],
       },
     }),
+    tailwindcss(),
+    svgr(),
   ],
   resolve: {
     alias: {
       '@sphere/shared': fileURLToPath(
         new URL('../shared/src/index.ts', import.meta.url)
       ),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
 })

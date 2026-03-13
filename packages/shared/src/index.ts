@@ -1,3 +1,5 @@
+export { loginFormSchema, registerFormSchema } from './schemas/auth';
+
 // Core user shape — mirrors the Drizzle schema in packages/api/src/db/schema.ts
 export interface User {
   id: number;
