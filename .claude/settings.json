@@ -5,7 +5,11 @@
       "Bash(find /Users/sahilverma/devspace/foundry/sphere -maxdepth 3 -not -path */node_modules/* -not -path */.git/* -type f)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d.get\\(''''lockfileVersion'''',''''?''''\\)\\); print\\(list\\(d.get\\(''''packages'''',{}\\).keys\\(\\)\\)[:5]\\)\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); pkgs=d.get\\(''''packages'''',{}\\); ws=[k for k in pkgs.keys\\(\\) if k.startswith\\(''''api''''\\) or k.startswith\\(''''ui''''\\)]; print\\(ws\\)\")",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(docker compose:*)",
+      "Bash(docker-compose version:*)",
+      "Bash(docker version:*)",
+      "Read(//Users/sahilverma/.docker/**)"
     ]
   }
 }

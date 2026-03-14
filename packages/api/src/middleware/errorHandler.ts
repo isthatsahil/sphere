@@ -11,14 +11,20 @@ export const errorHandler = (
 
   // Handle specific error types
   if (err.name === "ValidationError") {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ message: err.message, statusCode: 400 });
     return;
   }
 
-  if (err.name === "UnauthorizedError") {
-    res.status(401).json({ message: "Unauthorized" });
+  if (err.name === "Route not found") {
+    res.status(404).json({ message: err.message, statusCode: 404 });
+    return;
+  }
+  if (err.name === "Unauthorized Error") {
+    res.status(401).json({ message: "Unauthorized", statusCode: 401 });
     return;
   }
 
-  res.status(500).json({ message: "Internal Server Error" });
+  res
+    .status(500)
+    .json({ message: err.message || "Internal Server Error", statusCode: 500 });
 };

@@ -8,6 +8,13 @@
       "when": 1773256840340,
       "tag": "0000_smooth_hellion",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1773410598839,
+      "tag": "0001_curly_the_liberteens",
+      "breakpoints": true
     }
   ]
 }
