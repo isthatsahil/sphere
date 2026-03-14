@@ -10,12 +10,12 @@ export const errorHandler = (
   console.error(err.stack);
 
   // Handle specific error types
-  if (err.name === "ValidationError") {
+  if (err.name === "validationError") {
     res.status(400).json({ message: err.message, statusCode: 400 });
     return;
   }
 
-  if (err.name === "Route not found") {
+  if (err.name === "routeNotFound") {
     res.status(404).json({ message: err.message, statusCode: 404 });
     return;
   }

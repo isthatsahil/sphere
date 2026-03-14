@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import { logger } from "../config/logger.js";
-import CustomError from "../middleware/customError.js";
+import { logger } from "src/config/logger.js";
+import CustomError from "src/middleware/customError.js";
 
 export const signup = async (
   req: Request,

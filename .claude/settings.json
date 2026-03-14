@@ -9,7 +9,8 @@
       "Bash(docker compose:*)",
       "Bash(docker-compose version:*)",
       "Bash(docker version:*)",
-      "Read(//Users/sahilverma/.docker/**)"
+      "Read(//Users/sahilverma/.docker/**)",
+      "Bash(find /Users/sahilverma/devspace/foundry/sphere/packages -not -path */node_modules/* -not -path */.git/* -type d)"
     ]
   }
 }
