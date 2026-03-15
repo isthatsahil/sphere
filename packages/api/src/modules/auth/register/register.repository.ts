@@ -2,7 +2,7 @@ import { eq, or } from "drizzle-orm";
 import { db } from "src/config/db.js";
 import { users } from "src/db/schema.js";
 
-export const userRepository = {
+export const registerRepository = {
   /**
    * Finds a user by email or username.
    *

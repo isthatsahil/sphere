@@ -15,6 +15,13 @@
       "when": 1773410598839,
       "tag": "0001_curly_the_liberteens",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1773598689311,
+      "tag": "0002_safe_psylocke",
+      "breakpoints": true
     }
   ]
 }
