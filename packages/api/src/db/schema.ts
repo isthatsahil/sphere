@@ -14,6 +14,8 @@ export const users = pgTable("users", {
 
 export const refreshTokens = pgTable("refresh_tokens", {
   id: serial("id").primaryKey(),
+  // Foreign key → users.id. onDelete: "cascade" means all refresh tokens
+  // for a user are automatically deleted when the user is deleted.
   userId: integer("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),

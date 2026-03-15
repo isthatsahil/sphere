@@ -2,6 +2,8 @@ import { ConflictError } from "src/utils/errors.js";
 import { registerRepository } from "./register.repository.js";
 import { hashPassword } from "src/utils/utils.js";
 import { logger } from "src/config/logger.js";
+import { generateAccessToken, generateRefreshToken } from "src/utils/token.js";
+import { tokenRepository } from "../shared/token.repository.js";
 
 export const registerService = {
   register: async (email: string, username: string, password: string) => {
@@ -19,6 +21,18 @@ export const registerService = {
       throw new ConflictError("Email or username already exists");
     }
     const hashedPassword = await hashPassword(password);
-    return registerRepository.createUser(email, username, hashedPassword);
+    const user = await registerRepository.createUser(
+      email,
+      username,
+      hashedPassword,
+    );
+
+    const payload = { userId: user.id, email: user.email };
+    const accessToken = generateAccessToken(payload);
+    const refreshToken = generateRefreshToken(payload);
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    await tokenRepository.saveRefreshToken(user.id, refreshToken, expiresAt);
+
+    return { user, accessToken, refreshToken };
   },
 };

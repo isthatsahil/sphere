@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { registerController } from "./register.controller.js";
 import { validate } from "src/middleware/validate.middleware.js";
 import { registerBodySchema } from "@sphere/shared";
+import { registerController } from "../register/register.controller.js";
 
 const router = Router();
 
