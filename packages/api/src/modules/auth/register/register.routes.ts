@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { validate } from "src/middleware/validate.middleware.js";
-import { registerBodySchema } from "@sphere/shared";
 import { registerController } from "../register/register.controller.js";
-
+import { registerBodySchema } from "./register.schema.js";
 const router = Router();
 
 router.post(
