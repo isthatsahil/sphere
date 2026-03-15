@@ -1,10 +1,11 @@
 import express, { urlencoded } from "express";
-import { errorHandler } from "./middleware/errorHandler.js";
+import { errorHandler } from "./middleware/errorHandler.middleware.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { notFound } from "./middleware/notFound.js";
+import { notFound } from "./middleware/notFound.middleware.js";
 import dotenv from "dotenv";
 import { logger } from "./config/logger.js";
+import v1Router from "./routes/v1/index.js";
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+
+app.use("/api/v1", v1Router);
 
 app.use(notFound);
 app.use(errorHandler);

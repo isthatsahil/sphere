@@ -5,7 +5,7 @@ const Auth = lazy(() => import("../pages/Auth/index.tsx"));
 const ChatPage = lazy(() => import("../pages/Chat/index.tsx"));
 
 export const routes = [
-  { path: "/auth", element: <Auth /> },
+  { path: "/login", element: <Auth /> },
   { path: "/chat", element: <ChatPage /> },
-  { path: "*", element: <Navigate replace to="/auth" /> },
+  { path: "*", element: <Navigate replace to="/login" /> },
 ];
