@@ -8,6 +8,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "composite": true,
     "declaration": true,
     "outDir": "./dist"
