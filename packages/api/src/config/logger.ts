@@ -1,7 +1,7 @@
 import winston from "winston";
 import fs from "fs";
 import path from "path";
-import { maskSensitiveData } from "src/utils/utils.js";
+import { maskSensitiveData, sanitizeLogMessage } from "src/utils/utils.js";
 
 type LogLevel = "error" | "warn" | "info" | "debug";
 
@@ -70,16 +70,20 @@ class Logger {
     return Logger.instance;
   }
 
+  private prepare(message: string): string {
+    return maskSensitiveData(sanitizeLogMessage(message));
+  }
+
   info(message: string) {
-    this.logger.info(maskSensitiveData(message));
+    this.logger.info(this.prepare(message));
   }
 
   warn(message: string) {
-    this.logger.warn(maskSensitiveData(message));
+    this.logger.warn(this.prepare(message));
   }
 
   debug(message: string) {
-    this.logger.debug(maskSensitiveData(message));
+    this.logger.debug(this.prepare(message));
   }
 
   error(message: string | Error) {
@@ -87,7 +91,7 @@ class Logger {
       message instanceof Error
         ? `${message.message}\n${message.stack}`
         : message;
-    this.logger.error(maskSensitiveData(raw));
+    this.logger.error(this.prepare(raw));
   }
 }
 

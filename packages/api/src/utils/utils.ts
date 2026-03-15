@@ -39,6 +39,30 @@ export async function verifyPassword(
   return bcrypt.compare(plainText, hash);
 }
 
+const MAX_LOG_LENGTH = 2000;
+
+/**
+ * Sanitizes a log message string before it is written to any transport.
+ *
+ * Performs three transforms in order:
+ *  1. Strip ANSI escape codes — prevent terminal colour injection
+ *  2. Replace newlines/carriage returns — prevent fake log line injection
+ *  3. Truncate — prevent large payloads from flooding log files
+ *
+ * @param message - Raw log message string.
+ * @returns Sanitized string safe to write to log transports.
+ */
+export function sanitizeLogMessage(message: string): string {
+  // 1. Strip ANSI escape codes (e.g. ESC[31mRed ESC[0m)
+  const ansiPattern = new RegExp(String.fromCharCode(27) + "\\[[0-9;]*m", "g");
+  // 2. Replace newlines/carriage returns to prevent log injection
+  // 3. Truncate to prevent oversized log entries
+  return message
+    .replace(ansiPattern, "")
+    .replace(/[\r\n]+/g, " | ")
+    .slice(0, MAX_LOG_LENGTH);
+}
+
 // Fields whose values will be replaced with [REDACTED] in all log output
 const SENSITIVE_FIELDS = [
   "password",
