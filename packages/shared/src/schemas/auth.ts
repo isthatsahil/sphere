@@ -37,3 +37,4 @@ export const registerFormSchema = z.object({
 });
 
 export const registerBodySchema = z.object({ body: registerFormSchema });
+export const loginBodySchema = z.object({ body: loginFormSchema });

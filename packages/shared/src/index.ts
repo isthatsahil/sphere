@@ -1,5 +1,6 @@
 export {
   loginFormSchema,
+  loginBodySchema,
   registerFormSchema,
   registerBodySchema,
 } from "./schemas/auth";

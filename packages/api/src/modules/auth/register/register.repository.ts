@@ -1,6 +1,6 @@
 import { eq, or } from "drizzle-orm";
 import { db } from "src/config/db.js";
-import { users } from "src/db/schema.js";
+import { users, type UserType } from "src/db/schema.js";
 
 export const registerRepository = {
   /**
@@ -33,11 +33,16 @@ export const registerRepository = {
    * @param passwordHash - The bcrypt hash of the user's password.
    * @returns The newly created user row.
    */
-  createUser: async (email: string, username: string, passwordHash: string) => {
-    return db
+  createUser: async (
+    email: string,
+    username: string,
+    passwordHash: string,
+  ): Promise<UserType> => {
+    const [user] = await db
       .insert(users)
       .values({ email, username, passwordHash })
-      .returning()
-      .then((result) => result[0]);
+      .returning();
+    if (!user) throw new Error("Insert failed: no row returned");
+    return user;
   },
 };

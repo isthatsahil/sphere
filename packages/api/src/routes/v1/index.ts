@@ -1,7 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
 import { createRequire } from "module";
-import authRouter from "src/modules/auth/common/common.routes.js";
+import authRouter from "src/modules/auth/auth.routes.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../../../package.json") as { version: string };

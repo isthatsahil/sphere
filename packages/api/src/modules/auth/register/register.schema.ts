@@ -1,7 +1,6 @@
-import { registerFormSchema, loginFormSchema } from "@sphere/shared";
+import { registerFormSchema, registerBodySchema } from "@sphere/shared";
 import type { z } from "zod";
 
-export { registerFormSchema, loginFormSchema };
+export { registerBodySchema };
 
 export type RegisterInput = z.infer<typeof registerFormSchema>;
-export type LoginInput = z.infer<typeof loginFormSchema>;
