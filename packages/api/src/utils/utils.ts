@@ -38,3 +38,42 @@ export async function verifyPassword(
 ): Promise<boolean> {
   return bcrypt.compare(plainText, hash);
 }
+
+// Fields whose values will be replaced with [REDACTED] in all log output
+const SENSITIVE_FIELDS = [
+  "password",
+  "passwordHash",
+  "token",
+  "accessToken",
+  "refreshToken",
+  "authorization",
+  "secret",
+  "apiKey",
+];
+
+/**
+ * Masks sensitive field values in a log message string.
+ *
+ * Handles two formats:
+ *  - Plain text:  `password: secret123`   → `password: [******]`
+ *  - JSON:        `"password":"secret123"` → `"password":"[******]"`
+ */
+export function maskSensitiveData(message: string): string {
+  let masked = message;
+
+  for (const field of SENSITIVE_FIELDS) {
+    // JSON format: "field":"value" or "field": "value"
+    masked = masked.replace(
+      new RegExp(`"${field}"\\s*:\\s*"[^"]*"`, "gi"),
+      `"${field}":"[******]"`,
+    );
+
+    // Plain text format: field: value (up to comma, closing brace, or end of line)
+    masked = masked.replace(
+      new RegExp(`(${field})\\s*:\\s*([^,\\s}\\)]+)`, "gi"),
+      `$1: [******]`,
+    );
+  }
+
+  return masked;
+}

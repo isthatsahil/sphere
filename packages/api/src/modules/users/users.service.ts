@@ -5,7 +5,9 @@ import { logger } from "src/config/logger.js";
 
 export const userService = {
   register: async (email: string, username: string, password: string) => {
-    logger.info("Inside userService.register");
+    logger.info(
+      `Attempting to register user with email: ${email}, username: ${username}`,
+    );
     const existingUser = await userRepository.findByEmailOrUsername(
       email,
       username,
