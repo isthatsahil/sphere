@@ -1,11 +1,15 @@
-const API_BASE = "api/v1";
-
-export const ROUTES = {
+export const API_ROUTES = {
+  base: `/api`,
   auth: {
-    base: `${API_BASE}/auth`,
-    login: `${API_BASE}/auth/login`,
-    register: `${API_BASE}/auth/register`,
-    refresh: `${API_BASE}/auth/refresh`,
-    logout: `${API_BASE}/auth/logout`,
+    base: `/auth`,
+    login: `/auth/login`,
+    register: `/auth/register`,
+    refresh: `/auth/refresh`,
+    logout: `/auth/logout`,
   },
+} as const;
+
+export const LOGIN_ROUTES = {
+  login: `/login`,
+  register: `/register`,
 } as const;
