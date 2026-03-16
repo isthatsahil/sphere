@@ -1,2 +1,2 @@
-export { config } from "./config";
-export { ROUTES } from "./routes";
+export { SERVER_CONFIG } from "./config";
+export { API_ROUTES, LOGIN_ROUTES } from "./routes";
