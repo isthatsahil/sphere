@@ -20,13 +20,12 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
     });
 
     function onSubmit(data: z.infer<typeof loginFormSchema>) {
-        // Do something with the form values.
         console.log(data)
     }
 
     return (
-        <>
-            <form id="login-form" className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-5">
+            <form id="login-form" onSubmit={form.handleSubmit(onSubmit)}>
                 <FieldGroup>
                     <Controller
                         name="identifier"
@@ -38,13 +37,12 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
                                     id="identifier"
                                     aria-invalid={fieldState.invalid}
                                     placeholder="Email or username"
-                                    className="h-13 rounded-xl border-gray-200 text-sm px-4"
+                                    className="h-13 rounded-xl text-sm px-4"
                                 />
                                 {fieldState.invalid && (
                                     <FieldError errors={[fieldState.error]} />
                                 )}
                             </Field>
-                            // <Input placeholder="Email or username" {...field} />
                         )}
                     />
                     <Controller
@@ -58,27 +56,25 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
                                     type="password"
                                     aria-invalid={fieldState.invalid}
                                     placeholder="Password"
-                                    className="h-13 rounded-xl border-gray-200 text-sm px-4"
+                                    className="h-13 rounded-xl text-sm px-4"
                                 />
                                 {fieldState.invalid && (
-                                            <FieldError errors={[fieldState.error]} />
+                                    <FieldError errors={[fieldState.error]} />
                                 )}
                             </Field>
                         )}
                     />
-
                 </FieldGroup>
             </form>
-            {/* Sign In Button — auto width, NOT full width */}
-            <Button type="submit" form="login-form" className="w-auto self-start px-10 h-12 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold text-base">
+            <Button type="submit" form="login-form" className="w-full h-12 rounded-xl font-semibold text-base">
                 Sign In
             </Button>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-[oklch(0.50_0.04_322)] dark:text-[oklch(0.58_0.04_322)]">
                 Don't have an account?{" "}
-                <Button variant="link" className="text-purple-600 text-xs font-semibold hover:underline p-0" onClick={() => setIsLogin((prev) => !prev)}>
+                <Button variant="link" className="text-xs font-semibold p-0 h-auto" onClick={() => setIsLogin((prev) => !prev)}>
                     Sign Up
                 </Button>
             </p>
-        </>
-);
+        </div>
+    );
 }

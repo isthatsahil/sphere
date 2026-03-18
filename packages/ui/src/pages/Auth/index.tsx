@@ -1,12 +1,7 @@
 import LoginPage from "./LoginPage";
 
-
 const Auth = () => {
-  return (
-    <>
-        <LoginPage />
-    </>
-  )
-}
+  return <LoginPage />;
+};
 
 export default Auth;

@@ -1,43 +1,54 @@
-
-import { useState } from 'react';
-import ChattingIllustration from '../../assets/chatting.svg?react';
-import Logo from '../../assets/logo.svg?react';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
+import { useState } from "react";
+import Logo from "../../assets/logo.svg?react";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+import SvgAuthPanel from "./components/SvgPanel";
 
 export default function LoginPage() {
   const [isLoginForm, setIsLoginForm] = useState(true);
+
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-white">
-      {/* LEFT PANEL */}
-      <div className="flex flex-col flex-1 px-12 lg:px-20 py-10">
-        <div className="flex items-center">
-          <Logo className='w-10 h-10' />
-          <span className="text-sm font-semibold text-gray-800">Sphere</span>
+    <div className="flex h-screen w-screen overflow-hidden bg-background">
+      {/* LEFT — Form panel */}
+      <div className="flex flex-col flex-1 px-10 sm:px-14 lg:px-16 py-10">
+        {/* Logo */}
+        <div className="flex items-center gap-2.5 auth-enter">
+          <Logo className="w-9 h-9" />
+          <span className="font-display text-sm font-bold tracking-tight text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)]">
+            Sphere
+          </span>
         </div>
-        <div className="flex-1 flex flex-col justify-center max-w-sm">
-          <h1 className="text-5xl font-black text-gray-900 leading-tight mb-3">
-            Holla,<br />Welcome Back
-          </h1>
-          <p className="text-gray-400 text-sm mb-10">
-            Hey, welcome back to your special place
-          </p>
-          <div className="space-y-4 mb-5">
-            {isLoginForm ? <LoginForm setIsLogin={setIsLoginForm} /> : <RegisterForm setIsLogin={setIsLoginForm} />}
+
+        {/* Form area — vertically centered */}
+        <div className="flex-1 flex flex-col justify-center max-w-95">
+          {/* Heading — key swap triggers re-animation */}
+          <div key={isLoginForm ? "lh" : "rh"} className="mb-8 auth-enter">
+            <h1 className="auth-heading font-display font-black leading-[1.02] tracking-tight mb-3 text-[oklch(0.18_0.05_322)] dark:text-[oklch(0.95_0.01_320)]">
+              {isLoginForm ? "Welcome back." : "Join Sphere."}
+            </h1>
+            <p className="text-sm leading-relaxed text-[oklch(0.50_0.05_322)] dark:text-[oklch(0.58_0.04_322)]">
+              {isLoginForm
+                ? "Your conversations are waiting."
+                : "Start something personal."}
+            </p>
+          </div>
+
+          {/* Form — key swap triggers re-animation */}
+          <div key={isLoginForm ? "lf" : "rf"} className="auth-enter-delay-1">
+            {isLoginForm ? (
+              <LoginForm setIsLogin={setIsLoginForm} />
+            ) : (
+              <RegisterForm setIsLogin={setIsLoginForm} />
+            )}
           </div>
         </div>
+
+        {/* Brand accent */}
+        <div className="auth-enter-delay-2 h-px w-12 bg-[oklch(0.62_0.22_322)]" />
       </div>
 
-      {/* RIGHT PANEL */}
-      <div className="hidden md:block md:w-[40%] lg:w-[45%] xl:w-[48%] p-4">
-        <div className="flex items-center justify-center w-full h-full rounded-2xl overflow-hidden"
-          style={{
-            background: "linear-gradient(135deg, #b48ef5 0%, #8b5cf6 35%, #6d28d9 70%, #5b21b6 100%)"
-          }}
-        >
-          <ChattingIllustration className="h-4/5 w-auto max-w-full lg:p-10" />
-        </div>
-      </div>
+      {/* RIGHT — Illustration panel */}
+      <SvgAuthPanel />
     </div>
-  )
+  );
 }

@@ -7,7 +7,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    --background: oklch(1 0 0);
+    --background: oklch(0.985 0.012 320);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
@@ -22,9 +22,9 @@
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    --border: oklch(0.91 0.012 320);
+    --input: oklch(0.91 0.015 320);
+    --ring: oklch(0.62 0.18 322);
     --chart-1: oklch(0.833 0.145 321.434);
     --chart-2: oklch(0.667 0.295 322.15);
     --chart-3: oklch(0.591 0.293 322.896);
@@ -42,7 +42,7 @@
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
+    --background: oklch(0.155 0.04 320);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
     --card-foreground: oklch(0.985 0 0);
@@ -59,7 +59,7 @@
     --destructive: oklch(0.704 0.191 22.216);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
+    --ring: oklch(0.55 0.16 322);
     --chart-1: oklch(0.833 0.145 321.434);
     --chart-2: oklch(0.667 0.295 322.15);
     --chart-3: oklch(0.591 0.293 322.896);
@@ -76,7 +76,8 @@
 }
 
 @theme inline {
-    --font-sans: 'Inter Variable', sans-serif;
+    --font-sans: 'Geist Variable', sans-serif;
+    --font-display: 'Syne', sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -128,3 +129,81 @@
     @apply font-sans;
     }
 }
+
+@keyframes slide-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.auth-enter {
+  animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.auth-enter-delay-1 {
+  animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+}
+
+.auth-enter-delay-2 {
+  animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
+}
+
+.auth-heading {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.auth-logo-halo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-logo-halo::before {
+  content: '';
+  position: absolute;
+  width: 128px;
+  height: 128px;
+  background: radial-gradient(circle, oklch(0.62 0.25 322 / 0.13), transparent 65%);
+  border-radius: 50%;
+}
+
+.auth-stage {
+  background: oklch(0.17 0.05 322);
+}
+
+.auth-stage-glow {
+  background: radial-gradient(ellipse 75% 60% at 90% 100%, oklch(0.38 0.15 322 / 0.28), transparent);
+}
+
+.auth-stage-watermark {
+  font-size: clamp(5rem, 9vw, 8.5rem);
+  letter-spacing: -0.04em;
+  color: rgb(255 255 255 / 0.03);
+  color: oklch(1 0 0 / 0.03);
+}
+
+.auth-stage-heading {
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  color: rgb(244 241 247);
+  color: oklch(0.96 0.01 320);
+}
+
+.auth-stage-badge-enter {
+  animation: fade-in 0.7s 0.4s ease-out both;
+}
+
+.auth-stage-item-1 { animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both; }
+.auth-stage-item-2 { animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both; }
+.auth-stage-item-3 { animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both; }
+.auth-stage-item-4 { animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both; }
