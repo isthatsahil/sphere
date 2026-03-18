@@ -1,6 +1,20 @@
+import { Button } from "@/components/ui/button";
+import { useLogout } from "@/hooks/useLogout";
 
 const ChatPage = () => {
-  return (<div>ChatPage</div>)
+  const { mutate: logout } = useLogout();
+  return (
+    <>
+      ChatPage
+      <Button
+        onClick={() => {
+          logout();
+        }}
+      >
+        Logout
+      </Button>
+    </>
+  );
 };
 
-export default ChatPage
+export default ChatPage;

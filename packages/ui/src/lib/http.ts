@@ -7,6 +7,7 @@ import axios, {
 
 import { SERVER_CONFIG, API_ROUTES, LOGIN_ROUTES } from "@/utils/constant";
 import { tokenStore } from "./tokenStore";
+import { useAuthStore } from "@/stores/authStore";
 
 /** Supported API versions. */
 type ApiVersion = "v1" | "v2";
@@ -42,7 +43,7 @@ interface RetryableRequestConfig extends InternalAxiosRequestConfig {
  */
 export function createApiClient(version: ApiVersion = "v1"): AxiosInstance {
   const instance = axios.create({
-    baseURL: `${SERVER_CONFIG.serverUrl}${API_ROUTES.base}${version}`,
+    baseURL: `${SERVER_CONFIG.serverUrl}${API_ROUTES.base}/${version}`,
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
   });
@@ -86,6 +87,7 @@ export function createApiClient(version: ApiVersion = "v1"): AxiosInstance {
       const isRefreshCall = originalRequest.url === API_ROUTES.auth.refresh;
       if (originalRequest._retry || isRefreshCall) {
         tokenStore.clearAccessToken();
+        useAuthStore.getState().clearUser();
         window.location.href = LOGIN_ROUTES.login;
         return Promise.reject(error);
       }
@@ -114,6 +116,7 @@ export function createApiClient(version: ApiVersion = "v1"): AxiosInstance {
       } catch (refreshError) {
         processQueue(refreshError, null);
         tokenStore.clearAccessToken();
+        useAuthStore.getState().clearUser();
         window.location.href = LOGIN_ROUTES.login;
         return Promise.reject(refreshError);
       } finally {

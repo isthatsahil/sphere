@@ -13,7 +13,7 @@ export const loginController = {
         password,
       );
       setRefreshCookie(res, refreshToken);
-      return res.status(200).json({ accessToken, user });
+      return res.status(200).json({ data: { accessToken, user } });
     } catch (error) {
       logger.error(error instanceof Error ? error : new Error(String(error)));
       return next(error);

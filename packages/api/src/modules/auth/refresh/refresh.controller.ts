@@ -13,7 +13,7 @@ export const refreshController = {
       const { accessToken, refreshToken } = await refreshService.refresh(token);
       setRefreshCookie(res, refreshToken);
 
-      return res.status(200).json({ accessToken });
+      return res.status(200).json({ data: { accessToken } });
     } catch (error) {
       logger.error(error instanceof Error ? error : new Error(String(error)));
       next(error);
