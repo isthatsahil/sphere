@@ -4,7 +4,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import SvgAuthPanel from "./components/SvgPanel";
 
-export default function LoginPage() {
+export default function AuthPage() {
   const [isLoginForm, setIsLoginForm] = useState(true);
 
   return (

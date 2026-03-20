@@ -1,4 +1,4 @@
-import { httpV1 } from "@/lib/http";
+import { authClient, baseClient } from "@/lib/http";
 import type { ApiResponse, User } from "@sphere/shared";
 import { API_ROUTES } from "@/utils/constant";
 
@@ -19,7 +19,7 @@ export interface AuthSuccessResponse {
 export async function loginApi(
   payload: LoginPayload,
 ): Promise<AuthSuccessResponse> {
-  const { data } = await httpV1.post<ApiResponse<AuthSuccessResponse>>(
+  const { data } = await authClient.post<ApiResponse<AuthSuccessResponse>>(
     API_ROUTES.auth.login,
     payload,
   );
@@ -29,7 +29,7 @@ export async function loginApi(
 export async function registerApi(
   payload: RegisterPayload,
 ): Promise<AuthSuccessResponse> {
-  const { data } = await httpV1.post<ApiResponse<AuthSuccessResponse>>(
+  const { data } = await authClient.post<ApiResponse<AuthSuccessResponse>>(
     API_ROUTES.auth.register,
     payload,
   );
@@ -37,5 +37,5 @@ export async function registerApi(
 }
 
 export async function logoutApi(): Promise<void> {
-  await httpV1.post(API_ROUTES.auth.logout);
+  await baseClient.post(API_ROUTES.auth.logout);
 }

@@ -24,7 +24,6 @@ const RegisterForm = ({ setIsLogin }: RegisterFormProps) => {
   const { mutate: register, isPending } = useRegister();
 
   function onSubmit(data: z.infer<typeof registerFormSchema>) {
-    console.log(data);
     register(data);
   }
 

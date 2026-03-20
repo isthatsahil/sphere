@@ -41,7 +41,7 @@ interface RetryableRequestConfig extends InternalAxiosRequestConfig {
  * import { httpV1 } from "@/lib/http";
  * const data = await httpV1.get("/users");
  */
-export function createApiClient(version: ApiVersion = "v1"): AxiosInstance {
+export function createBaseClient(version: ApiVersion = "v1"): AxiosInstance {
   const instance = axios.create({
     baseURL: `${SERVER_CONFIG.serverUrl}${API_ROUTES.base}/${version}`,
     withCredentials: true,
@@ -129,10 +129,31 @@ export function createApiClient(version: ApiVersion = "v1"): AxiosInstance {
 }
 
 /**
- * Shared Axios instance for API v1.
+ * Unauthenticated Axios instance for auth endpoints (login, register).
+ * No refresh interceptor — these calls are made before a session exists.
+ * 4xx errors are rejected as-is so mutation `onError` handlers can extract
+ * the server message and surface it to the user.
+ */
+function createAuthClient(version: ApiVersion = "v1"): AxiosInstance {
+  const instance = axios.create({
+    baseURL: `${SERVER_CONFIG.serverUrl}${API_ROUTES.base}/${version}`,
+    withCredentials: true,
+    headers: { "Content-Type": "application/json" },
+  });
+  instance.interceptors.response.use(
+    (response: AxiosResponse) => response,
+    (error: AxiosError) => Promise.reject(error),
+  );
+  return instance;
+}
+
+/**
+ * Authenticated Axios instance for API v1.
+ * Attaches Bearer tokens and handles silent token refresh on 401.
  *
  * This is a module-level singleton — ES module caching guarantees that all
  * imports across the app receive the same instance, preserving the shared
  * refresh queue and token state for the lifetime of the page session.
  */
-export const httpV1 = createApiClient("v1");
+export const baseClient = createBaseClient("v1");
+export const authClient = createAuthClient("v1");

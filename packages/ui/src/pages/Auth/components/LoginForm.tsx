@@ -19,9 +19,8 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
       password: "",
     },
   });
-  const { mutate: login } = useLogin();
+  const { mutate: login, isPending } = useLogin();
   function onSubmit(data: z.infer<typeof loginFormSchema>) {
-    console.log(data);
     login(data);
   }
 
@@ -71,11 +70,12 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
         </FieldGroup>
       </form>
       <Button
+        disabled={isPending}
         type="submit"
         form="login-form"
         className="w-full h-12 rounded-xl font-semibold text-base"
       >
-        Sign In
+        {isPending ? "Signing in..." : "Sign in"}
       </Button>
       <p className="text-xs text-[oklch(0.50_0.04_322)] dark:text-[oklch(0.58_0.04_322)]">
         Don't have an account?{" "}
