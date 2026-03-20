@@ -1,20 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { useLogout } from "@/hooks/useLogout";
+import ChatPageContainer from "./ChatPageContainer";
 
 const ChatPage = () => {
-  const { mutate: logout } = useLogout();
-  return (
-    <>
-      ChatPage
-      <Button
-        onClick={() => {
-          logout();
-        }}
-      >
-        Logout
-      </Button>
-    </>
-  );
+  return <ChatPageContainer />;
 };
 
 export default ChatPage;

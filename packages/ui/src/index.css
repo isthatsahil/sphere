@@ -3,6 +3,8 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/inter";
+@import "@fontsource/syne/700.css";
+@import "@fontsource/syne/800.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -207,3 +209,44 @@
 .auth-stage-item-2 { animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both; }
 .auth-stage-item-3 { animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both; }
 .auth-stage-item-4 { animation: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both; }
+
+.chat-empty-blob-primary {
+  position: absolute;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 9999px;
+  pointer-events: none;
+  top: 15%;
+  left: 50%;
+  margin-left: -9rem;
+  background: radial-gradient(circle, oklch(0.62 0.25 322 / 0.09) 0%, transparent 70%);
+}
+
+.chat-empty-blob-secondary {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 9999px;
+  pointer-events: none;
+  bottom: 20%;
+  right: 20%;
+  background: radial-gradient(circle, oklch(0.667 0.295 322 / 0.07) 0%, transparent 70%);
+}
+
+.contact-dialog-glow {
+  background: radial-gradient(ellipse 90% 70% at 50% 0%, oklch(0.62 0.25 322 / 0.1), transparent);
+}
+
+.contact-avatar-0 {
+  background: linear-gradient(135deg, oklch(0.667 0.295 322.15), oklch(0.518 0.253 323.949));
+}
+.contact-avatar-1 {
+  background: linear-gradient(135deg, oklch(0.591 0.293 322.896), oklch(0.452 0.211 324.591));
+}
+.contact-avatar-2 {
+  background: linear-gradient(135deg, oklch(0.833 0.145 321.434), oklch(0.667 0.295 322.15));
+}
+.contact-avatar-3 {
+  background: linear-gradient(135deg, oklch(0.518 0.253 323.949), oklch(0.38 0.18 324));
+}
+
