@@ -1,12 +1,14 @@
 import type { NextFunction, Request, Response } from "express";
 import { logger } from "src/config/logger.js";
+import path from "path";
 import { registerService } from "./register.service.js";
 import { setRefreshCookie } from "src/utils/cookies.js";
 import type { RegisterInput } from "./register.schema.js";
 
+const log = logger.child(path.basename(import.meta.url, ".js"));
+
 export const registerController = {
   register: async (req: Request, res: Response, next: NextFunction) => {
-    logger.info(`Attempting to register user with email: ${req.body.email}`);
     try {
       const { email, username, password } = req.body as RegisterInput;
       const { user, accessToken, refreshToken } =
@@ -14,7 +16,7 @@ export const registerController = {
       setRefreshCookie(res, refreshToken);
       return res.status(201).json({ data: { accessToken, user } });
     } catch (error) {
-      logger.error(error instanceof Error ? error : new Error(String(error)));
+      log.error(error instanceof Error ? error : new Error(String(error)));
       return next(error);
     }
   },

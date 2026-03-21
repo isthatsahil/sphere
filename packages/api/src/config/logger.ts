@@ -12,7 +12,8 @@ const logsDir = path.resolve("logs");
 fs.mkdirSync(logsDir, { recursive: true });
 
 const printfTemplate = winston.format.printf(
-  ({ timestamp, level, message }) => `[${timestamp}] ${level}: ${message}`,
+  ({ timestamp, level, message, module }) =>
+    `[${timestamp}] ${level}: ${module ? `[${module}] ` : ""}${message}`,
 );
 
 const fileFormat = winston.format.combine(
@@ -92,6 +93,10 @@ class Logger {
         ? `${message.message}\n${message.stack}`
         : message;
     this.logger.error(this.prepare(raw));
+  }
+
+  child(module: string): winston.Logger {
+    return this.logger.child({ module });
   }
 }
 

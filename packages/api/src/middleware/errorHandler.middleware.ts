@@ -1,6 +1,9 @@
 import type { NextFunction, Request, Response } from "express";
 import { AppError } from "../utils/errors.js";
 import { logger } from "src/config/logger.js";
+import path from "path";
+
+const log = logger.child(path.basename(import.meta.url, ".js"));
 
 export const errorHandler = (
   err: Error,
@@ -10,6 +13,7 @@ export const errorHandler = (
   _next: NextFunction, // must be declared even if unused
 ): void => {
   if (err instanceof AppError) {
+    log.warn(`${err.name} [${err.statusCode}]: ${err.message}`);
     res.status(err.statusCode).json({
       error: err.name,
       message: err.message,
@@ -19,7 +23,7 @@ export const errorHandler = (
   }
 
   // Unexpected errors — don't leak internals
-  logger.error(err);
+  log.error(err);
   res.status(500).json({
     error: "InternalServerError",
     message: "Something went wrong",

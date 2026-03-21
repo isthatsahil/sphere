@@ -3,6 +3,9 @@ import { UnauthorizedError } from "src/utils/errors.js";
 import { refreshService } from "./refresh.service.js";
 import { setRefreshCookie } from "src/utils/cookies.js";
 import { logger } from "src/config/logger.js";
+import path from "path";
+
+const log = logger.child(path.basename(import.meta.url, ".js"));
 
 export const refreshController = {
   refresh: async (req: Request, res: Response, next: NextFunction) => {
@@ -15,7 +18,7 @@ export const refreshController = {
 
       return res.status(200).json({ data: { accessToken } });
     } catch (error) {
-      logger.error(error instanceof Error ? error : new Error(String(error)));
+      log.error(error instanceof Error ? error : new Error(String(error)));
       next(error);
     }
   },

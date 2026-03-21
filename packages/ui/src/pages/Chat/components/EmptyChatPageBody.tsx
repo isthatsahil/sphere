@@ -1,4 +1,5 @@
 import Logo from "@/assets/logo.svg?react";
+import { MoveLeft } from "lucide-react";
 
 const EmptyChatPageBody = () => {
   return (
@@ -26,21 +27,7 @@ const EmptyChatPageBody = () => {
 
         {/* Hint arrow pointing to menu */}
         <div className="flex items-center gap-2 text-muted-foreground mt-1">
-          <svg
-            width="20"
-            height="12"
-            viewBox="0 0 20 12"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M19 6H1M1 6L6 1M1 6L6 11"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <MoveLeft />
           <span className="text-[0.7rem] font-medium tracking-wide">
             conversations
           </span>

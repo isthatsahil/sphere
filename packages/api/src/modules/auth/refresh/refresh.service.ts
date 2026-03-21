@@ -1,5 +1,8 @@
 import { logger } from "src/config/logger.js";
+import path from "path";
 import type { TokenPayload } from "src/types/tokens.js";
+
+const log = logger.child(path.basename(import.meta.url, ".js"));
 import { UnauthorizedError } from "src/utils/errors.js";
 import {
   generateAccessToken,
@@ -16,14 +19,14 @@ export const refreshService = {
       // Verify the refresh token and extract the payload
       payload = verifyRefreshToken(token);
     } catch (error) {
-      logger.error(error instanceof Error ? error : new Error(String(error)));
+      log.error(error instanceof Error ? error : new Error(String(error)));
       throw new UnauthorizedError("Invalid or expired refresh token");
     }
 
     const existingToken = await tokenRepository.findRefreshToken(token);
     if (!existingToken) {
       // Token already rotated or revoked — possible reuse attack
-      logger.warn(`Refresh token not found in database: ${token}`);
+      log.warn(`Refresh token not found in database: ${token}`);
       throw new UnauthorizedError("Invalid refresh token");
     }
 

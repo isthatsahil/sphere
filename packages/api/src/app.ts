@@ -6,11 +6,13 @@ import { notFound } from "./middleware/notFound.middleware.js";
 import dotenv from "dotenv";
 import { logger } from "./config/logger.js";
 import v1Router from "./routes/v1/index.js";
+import path from "path";
 
 dotenv.config();
 
 const app = express();
-logger.info("Starting API server...");
+const log = logger.child(path.basename(import.meta.url, ".js"));
+log.info("Starting API server...");
 
 app.use(urlencoded({ extended: true }));
 
