@@ -2,6 +2,7 @@ import { Router } from "express";
 import type { Request, Response } from "express";
 import { createRequire } from "module";
 import authRouter from "src/modules/auth/auth.routes.js";
+import contactsRoute from "src/modules/contacts/contacts.routes.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../../../package.json") as { version: string };
@@ -13,5 +14,6 @@ v1Router.get("/health", (_req: Request, res: Response) => {
 });
 
 v1Router.use("/auth", authRouter);
+v1Router.use("/contacts", contactsRoute);
 
 export default v1Router;

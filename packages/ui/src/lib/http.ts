@@ -105,10 +105,10 @@ export function createBaseClient(version: ApiVersion = "v1"): AxiosInstance {
       isRefreshing = true;
 
       try {
-        const { data } = await instance.post<{ accessToken: string }>(
+        const { data } = await instance.post<{ data: { accessToken: string } }>(
           API_ROUTES.auth.refresh,
         );
-        const newToken = data.accessToken;
+        const newToken = data.data.accessToken;
         tokenStore.setAccessToken(newToken);
         processQueue(null, newToken);
         originalRequest.headers.set("Authorization", `Bearer ${newToken}`);

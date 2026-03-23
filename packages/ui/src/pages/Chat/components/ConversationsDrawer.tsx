@@ -1,9 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { X, Search } from "lucide-react";
 import EmptyConversationsDrawer from "./EmptyConversationsList";
 import ConversationsList from "./ConversationsList";
 import DialogContainer from "@/components/contacts/DialogContainer";
+import { Input } from "@/components/ui/input";
 
 const conversations = [
   {
@@ -76,6 +82,9 @@ const ConversationsDrawer = ({ open, onClose }: Props) => {
           <SheetTitle className="font-display font-black text-base tracking-tight text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)]">
             Messages
           </SheetTitle>
+          <SheetDescription className="sr-only">
+            Your conversations
+          </SheetDescription>
           <div className="flex items-center gap-1">
             <DialogContainer />
             <Button
@@ -94,7 +103,7 @@ const ConversationsDrawer = ({ open, onClose }: Props) => {
         <div className="px-3 py-2 shrink-0">
           <div className="flex items-center gap-2 bg-[oklch(0.97_0.012_320)] dark:bg-[oklch(0.19_0.04_320)] rounded-xl px-3 h-9">
             <Search className="size-3.5 text-muted-foreground shrink-0" />
-            <input
+            <Input
               placeholder="Search conversations..."
               className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             />

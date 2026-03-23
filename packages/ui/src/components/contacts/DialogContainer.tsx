@@ -26,10 +26,12 @@ const DialogContainer = ({ trigger }: DialogContainerProps) => {
           <Plus className="size-4" />
         </Button>
       )}
-      <ContactDialog
-        openNewContactDialog={openNewContactDialog}
-        setOpenNewContactDialog={setOpenNewContactDialog}
-      />
+      {openNewContactDialog && (
+        <ContactDialog
+          openNewContactDialog={openNewContactDialog}
+          setOpenNewContactDialog={setOpenNewContactDialog}
+        />
+      )}
     </>
   );
 };

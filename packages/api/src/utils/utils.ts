@@ -63,6 +63,72 @@ export function sanitizeLogMessage(message: string): string {
     .slice(0, MAX_LOG_LENGTH);
 }
 
+/** Options for {@link sanitiseText}. */
+export interface SanitiseTextOptions {
+  /** Maximum allowed length — input is truncated to this. Default: 10 000. */
+  maxLength?: number;
+  /** Allow `\n` and `\r` through (e.g. for multi-line messages). Default: true. */
+  allowNewlines?: boolean;
+}
+
+/**
+ * Sanitises user-supplied text before it is stored or broadcast.
+ *
+ * Layers of protection (applied in order):
+ *  1. Null-byte removal         — prevents DB / filesystem exploits
+ *  2. Control-character strip   — removes invisible non-printable chars
+ *                                 (optionally preserving `\n` / `\r` for
+ *                                 multi-line messages)
+ *  3. HTML entity encoding      — neutralises `< > & " '` to prevent XSS
+ *                                 when content is rendered in a browser
+ *  4. Trim                      — strips leading / trailing whitespace
+ *  5. Length cap                — truncates oversized payloads
+ *
+ * Note: SQL-injection protection is handled by parameterised queries in the
+ * ORM (Drizzle). This function is a defence-in-depth layer and should NOT be
+ * relied upon as the sole guard against injection attacks.
+ *
+ * @param raw     - Untrusted text received from the client.
+ * @param options - Optional tuning (maxLength, allowNewlines).
+ * @returns Sanitised string safe for storage and rendering.
+ *
+ * @example
+ * const message = sanitiseText(req.body.text);
+ * const username = sanitiseText(req.body.username, { allowNewlines: false });
+ */
+export function sanitiseText(
+  raw: string,
+  { maxLength = 10_000, allowNewlines = true }: SanitiseTextOptions = {},
+): string {
+  // 1. Remove null bytes
+  let text = raw.replace(/\0/g, "");
+
+  // 2. Strip non-printable control characters (U+0001–U+001F, U+007F)
+  //    Preserve \t (U+0009), and optionally \n (U+000A) / \r (U+000D)
+  // Build control-character patterns dynamically to satisfy the no-control-regex ESLint rule.
+  // allowNewlines=true  → keep \t (9), \n (10), \r (13); strip U+0001-U+0008, U+000B-U+000C, U+000E-U+001F, U+007F
+  // allowNewlines=false → strip all of U+0001-U+001F plus U+007F
+  const fc = String.fromCharCode;
+  const ctrlPattern = allowNewlines
+    ? `[${fc(1)}-${fc(8)}${fc(11)}${fc(12)}${fc(14)}-${fc(31)}${fc(127)}]`
+    : `[${fc(1)}-${fc(31)}${fc(127)}]`;
+  text = text.replace(new RegExp(ctrlPattern, "g"), "");
+
+  // 3. HTML-encode characters that are dangerous in a browser context
+  text = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+
+  // 4. Trim surrounding whitespace
+  text = text.trim();
+
+  // 5. Enforce maximum length
+  return text.slice(0, maxLength);
+}
+
 // Fields whose values will be replaced with [REDACTED] in all log output
 const SENSITIVE_FIELDS = [
   "password",

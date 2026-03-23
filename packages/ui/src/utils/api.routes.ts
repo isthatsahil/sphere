@@ -7,6 +7,10 @@ export const API_ROUTES = {
     refresh: `/auth/refresh`,
     logout: `/auth/logout`,
   },
+  contacts: {
+    base: "/contacts",
+    searchContact: "/contacts/search-contacts",
+  },
 } as const;
 
 export const LOGIN_ROUTES = {
