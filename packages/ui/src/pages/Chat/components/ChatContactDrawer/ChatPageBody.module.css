@@ -1,4 +1,4 @@
-@reference "../../../index.css";
+@reference "../../../../index.css";
 
 .scrollArea {
   @apply flex-1 overflow-y-auto;
