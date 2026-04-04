@@ -5,6 +5,7 @@ export {
   registerBodySchema,
 } from "./schemas/auth";
 
+export { profileFormSchema, profileBodySchema } from "./schemas/profile";
 // Core user shape — mirrors the Drizzle schema in packages/api/src/db/schema.ts
 export interface User {
   id: number;

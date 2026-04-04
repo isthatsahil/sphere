@@ -2,12 +2,21 @@ import ThemeToggler from "@/components/ui/ThemeToggler";
 import { useLogout } from "@/hooks/useLogout";
 import { Button } from "@/components/ui/button";
 import { Menu, Phone, Video, LogOut } from "lucide-react";
+import { useChatStore } from "@/stores/chatStore";
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+import { getInitials } from "@/utils/utils";
 
 interface Props {
   onMenuClick: () => void;
 }
 
 const ChatPageHeader = ({ onMenuClick }: Props) => {
+  const { selectedChatData, closeChat } = useChatStore();
   const { mutate: logout } = useLogout();
 
   return (
@@ -23,17 +32,22 @@ const ChatPageHeader = ({ onMenuClick }: Props) => {
       </Button>
 
       {/* Contact avatar */}
-      <div className="relative shrink-0">
-        <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[oklch(0.833_0.145_321.434)]">
-          <span className="text-[0.65rem] font-bold text-white">SC</span>
-        </div>
-        <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-background" />
-      </div>
+      <Avatar onClick={closeChat}>
+        <AvatarImage
+          src={selectedChatData?.avatar}
+          alt="user avatar"
+          className="grayscale"
+        />
+        <AvatarFallback className="text-[0.65rem] font-bold text-white bg-[oklch(0.833_0.145_321.434)]">
+          {getInitials(selectedChatData?.username)}
+        </AvatarFallback>
+        <AvatarBadge className="bg-green-600 dark:bg-green-800" />
+      </Avatar>
 
       {/* Contact info */}
       <div className="flex-1 min-w-0">
         <p className="font-display font-black text-sm tracking-[-0.01em] leading-tight truncate text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)]">
-          Sarah Chen
+          {selectedChatData?.username}
         </p>
         <p className="text-[0.65rem] text-emerald-500 font-medium leading-tight">
           online

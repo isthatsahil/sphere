@@ -2,7 +2,12 @@ import DialogContainer from "@/components/contacts/DialogContainer";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
-const EmptyConversationsDrawer = () => {
+type EmptyConversationsDrawerProp = {
+  onClose: () => void;
+};
+const EmptyConversationsDrawer = ({
+  onClose,
+}: EmptyConversationsDrawerProp) => {
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 text-center">
       {/* Abstract chat-bubble illustration */}
@@ -21,6 +26,7 @@ const EmptyConversationsDrawer = () => {
         Start one and it'll live here. Your people are waiting.
       </p>
       <DialogContainer
+        onClose={onClose}
         trigger={(open) => (
           <Button
             size="sm"

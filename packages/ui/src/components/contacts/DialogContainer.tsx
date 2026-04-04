@@ -5,9 +5,10 @@ import ContactDialog from "./components/ContactDialog";
 
 type DialogContainerProps = {
   trigger?: (open: () => void) => React.ReactNode;
+  onClose: () => void;
 };
 
-const DialogContainer = ({ trigger }: DialogContainerProps) => {
+const DialogContainer = ({ trigger, onClose }: DialogContainerProps) => {
   const [openNewContactDialog, setOpenNewContactDialog] =
     useState<boolean>(false);
   const openDialog = () => setOpenNewContactDialog(true);
@@ -30,6 +31,7 @@ const DialogContainer = ({ trigger }: DialogContainerProps) => {
         <ContactDialog
           openNewContactDialog={openNewContactDialog}
           setOpenNewContactDialog={setOpenNewContactDialog}
+          onClose={onClose}
         />
       )}
     </>

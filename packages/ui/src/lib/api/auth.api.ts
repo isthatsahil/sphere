@@ -39,3 +39,10 @@ export async function registerApi(
 export async function logoutApi(): Promise<void> {
   await baseClient.post(API_ROUTES.auth.logout);
 }
+
+export async function refreshApi(): Promise<string> {
+  const { data } = await authClient.post<ApiResponse<{ accessToken: string }>>(
+    API_ROUTES.auth.refresh,
+  );
+  return data.data.accessToken;
+}

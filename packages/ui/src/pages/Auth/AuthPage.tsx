@@ -13,7 +13,7 @@ export default function AuthPage() {
       <div className="flex flex-col flex-1 px-10 sm:px-14 lg:px-16 py-10">
         {/* Logo */}
         <div className="flex items-center gap-2.5 auth-enter">
-          <Logo className="w-9 h-9" />
+          <Logo className="w-9 h-9 transition-transform duration-500 hover:rotate-15 hover:scale-110" />
           <span className="font-display text-sm font-bold tracking-tight text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)]">
             Sphere
           </span>

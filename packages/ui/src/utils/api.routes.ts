@@ -11,6 +11,10 @@ export const API_ROUTES = {
     base: "/contacts",
     searchContact: "/contacts/search-contacts",
   },
+  profile: {
+    uploadSignature: "/profile/upload-signature",
+    update: "/profile/update-user",
+  },
 } as const;
 
 export const LOGIN_ROUTES = {

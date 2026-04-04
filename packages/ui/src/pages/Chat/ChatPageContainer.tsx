@@ -5,9 +5,11 @@ import ChatPageFooter from "./components/ChatPageFooter";
 import ConversationsDrawer from "./components/ConversationsDrawer";
 import EmptyChatPageBody from "./components/EmptyChatPageBody";
 import EmptyChatPageHeader from "./components/EmptyChatPageHeader";
+import { useChatStore } from "@/stores/chatStore";
 
 const ChatPageContainer = () => {
   const [showConversations, setShowConversations] = useState(false);
+  const { selectedChatType } = useChatStore();
 
   return (
     <div className="flex flex-col h-dvh bg-background overflow-hidden">
@@ -15,11 +17,20 @@ const ChatPageContainer = () => {
         open={showConversations}
         onClose={() => setShowConversations(false)}
       />
-      <EmptyChatPageHeader onMenuClick={() => setShowConversations(true)} />
-      {/* <ChatPageHeader onMenuClick={() => setShowConversations(true)} /> */}
+      {selectedChatType === null ? (
+        <EmptyChatPageHeader onMenuClick={() => setShowConversations(true)} />
+      ) : (
+        <ChatPageHeader onMenuClick={() => setShowConversations(true)} />
+      )}
       <main className="flex-1 flex flex-col min-h-0">
-        <EmptyChatPageBody />
-        {/* <ChatPageFooter /> */}
+        {selectedChatType === null ? (
+          <EmptyChatPageBody />
+        ) : (
+          <>
+            <ChatPageBody />
+            <ChatPageFooter />
+          </>
+        )}
       </main>
     </div>
   );

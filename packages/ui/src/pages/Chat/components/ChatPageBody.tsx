@@ -2,10 +2,30 @@ import { useRef } from "react";
 import { useMountEffect } from "@/hooks/useMountEffect";
 
 const messages = [
-  { id: "1", text: "hey! are you coming tonight? 🎉", from: "them", time: "7:42 PM" },
-  { id: "2", text: "yes!! wouldn't miss it. what time?", from: "me", time: "7:44 PM" },
-  { id: "3", text: "around 8 works! should I bring anything?", from: "them", time: "7:45 PM" },
-  { id: "4", text: "just yourself 😊 maybe some wine if you want", from: "them", time: "7:45 PM" },
+  {
+    id: "1",
+    text: "hey! are you coming tonight? 🎉",
+    from: "them",
+    time: "7:42 PM",
+  },
+  {
+    id: "2",
+    text: "yes!! wouldn't miss it. what time?",
+    from: "me",
+    time: "7:44 PM",
+  },
+  {
+    id: "3",
+    text: "around 8 works! should I bring anything?",
+    from: "them",
+    time: "7:45 PM",
+  },
+  {
+    id: "4",
+    text: "just yourself 😊 maybe some wine if you want",
+    from: "them",
+    time: "7:45 PM",
+  },
   { id: "5", text: "I'll grab a nice rosé 🍷", from: "me", time: "7:46 PM" },
   { id: "6", text: "perfect ✨", from: "them", time: "7:46 PM" },
   { id: "7", text: "can't wait, see you soon!", from: "them", time: "7:47 PM" },
@@ -50,10 +70,10 @@ const ChatPageBody = () => {
               )}
 
               <div
-                className={`px-4 py-2.5 text-sm leading-relaxed max-w-[72%] break-words ${
+                className={`px-4 py-2.5 text-sm leading-relaxed max-w-[72%] wrap-break-word ${
                   isMe
-                    ? "bg-primary text-primary-foreground rounded-2xl rounded-br-[4px]"
-                    : "bg-[oklch(0.955_0.018_320)] dark:bg-[oklch(0.21_0.04_320)] text-foreground rounded-2xl rounded-bl-[4px]"
+                    ? "bg-primary text-primary-foreground rounded-2xl rounded-br-lg"
+                    : "bg-[oklch(0.955_0.018_320)] dark:bg-[oklch(0.21_0.04_320)] text-foreground rounded-2xl rounded-bl-lg"
                 }`}
               >
                 {msg.text}
@@ -64,7 +84,9 @@ const ChatPageBody = () => {
 
         {/* Read receipt */}
         <div className="flex justify-end mt-1">
-          <span className="text-[0.65rem] text-muted-foreground">seen · 7:47 PM</span>
+          <span className="text-[0.65rem] text-muted-foreground">
+            seen · 7:47 PM
+          </span>
         </div>
 
         <div ref={bottomRef} />

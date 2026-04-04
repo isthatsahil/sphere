@@ -18,19 +18,22 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import { useChatStore } from "@/stores/chatStore";
 
 type ContactDialogPropTypes = {
   openNewContactDialog: boolean;
   setOpenNewContactDialog: (openNewContactDialog: boolean) => void;
+  onClose: () => void;
 };
 
 const ContactDialog = ({
   openNewContactDialog,
   setOpenNewContactDialog,
+  onClose,
 }: ContactDialogPropTypes) => {
-  const [inputValue, setInputValue] = useState("");
-  const [query, setQuery] = useState("");
-  const [added, setAdded] = useState<Set<string>>(new Set());
+  const { setSelectedChatType, setSelectedChatData } = useChatStore();
+  const [inputValue, setInputValue] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
   const { data, isFetching } = useSearchContacts(query);
 
   const debouncedSetQuery = useDebouncedCallback(setQuery);
@@ -55,6 +58,12 @@ const ContactDialog = ({
     debouncedSetQuery(event.target.value);
   };
 
+  const addNewContacts = (contact: IContact) => {
+    setSelectedChatType("contact");
+    setSelectedChatData(contact);
+    setOpenNewContactDialog(false);
+    onClose();
+  };
   return (
     <Dialog open={openNewContactDialog} onOpenChange={setOpenNewContactDialog}>
       <DialogContent
@@ -105,8 +114,7 @@ const ContactDialog = ({
           <ContactResultList
             filteredList={filtered}
             isLoading={isLoading}
-            added={added}
-            handleAdd={(id) => setAdded((prev) => new Set([...prev, id]))}
+            addNewContacts={addNewContacts}
           />
         </ScrollArea>
       </DialogContent>

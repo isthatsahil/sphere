@@ -23,7 +23,6 @@ export const contactService = {
       sanitisedTerm,
       userId,
     );
-    logger.info(`Searched contacts ${JSON.stringify(contacts)}`);
     return contacts;
   },
 };
