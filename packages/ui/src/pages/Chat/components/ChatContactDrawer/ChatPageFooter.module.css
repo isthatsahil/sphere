@@ -1,0 +1,37 @@
+@reference "../../../index.css";
+
+.footer {
+  @apply shrink-0 flex items-end gap-2 px-3 py-3 border-t border-border bg-background;
+}
+
+.attachBtn {
+  @apply size-9 rounded-full text-muted-foreground hover:text-foreground shrink-0 mb-0.5;
+}
+
+.inputWrapper {
+  @apply flex-1 flex items-end rounded-2xl px-4 py-2.5 gap-2 min-h-10.5 bg-[oklch(0.97_0.012_320)] dark:bg-[oklch(0.19_0.04_320)];
+}
+
+.textarea {
+  @apply flex-1 bg-transparent text-sm resize-none outline-none placeholder:text-muted-foreground max-h-32 leading-relaxed;
+}
+
+.emojiBtn {
+  @apply size-7 shrink-0 text-muted-foreground hover:text-foreground -mr-1 mb-0.5;
+}
+
+.emojiPicker {
+  @apply absolute bottom-20 right-2;
+}
+
+.sendBtn {
+  @apply size-9 rounded-full shrink-0 mb-0.5 transition-all duration-200;
+}
+
+.sendBtnActive {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.sendBtnInactive {
+  @apply bg-muted text-muted-foreground scale-95;
+}

@@ -1,0 +1,29 @@
+@reference "../../../index.css";
+
+.root {
+  @apply flex-1 flex flex-col items-center justify-center relative overflow-hidden select-none;
+}
+
+.content {
+  @apply relative flex flex-col items-center gap-5 px-8 text-center;
+}
+
+.headingGroup {
+  @apply flex flex-col gap-1.5;
+}
+
+.heading {
+  @apply font-display font-black text-2xl tracking-tight leading-none text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)];
+}
+
+.subtitle {
+  @apply text-sm text-muted-foreground leading-relaxed max-w-55;
+}
+
+.hint {
+  @apply flex items-center gap-2 text-muted-foreground mt-1;
+}
+
+.hintLabel {
+  @apply text-[0.7rem] font-medium tracking-wide;
+}

@@ -1,0 +1,21 @@
+@reference "../../../index.css";
+
+.root {
+  @apply flex flex-col items-center justify-center h-full py-14 px-6 gap-2.5;
+}
+
+.iconWrapper {
+  @apply size-11 rounded-2xl bg-muted flex items-center justify-center;
+}
+
+.icon {
+  @apply size-4 text-muted-foreground;
+}
+
+.title {
+  @apply text-sm font-semibold text-foreground;
+}
+
+.subtitle {
+  @apply text-xs text-center leading-relaxed max-w-45 text-muted-foreground;
+}

@@ -1,0 +1,9 @@
+@reference "../index.css";
+
+.item {
+  @apply flex items-center gap-4;
+}
+
+.textGroup {
+  @apply space-y-2;
+}

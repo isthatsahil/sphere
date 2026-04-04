@@ -3,6 +3,7 @@ import ThemeToggler from "@/components/ui/ThemeToggler";
 import { useLogout } from "@/hooks/useLogout";
 import { Button } from "@/components/ui/button";
 import { Menu, LogOut } from "lucide-react";
+import styles from "./EmptyChatPageHeader.module.css";
 
 interface Props {
   onMenuClick: () => void;
@@ -12,11 +13,11 @@ const EmptyChatPageHeader = ({ onMenuClick }: Props) => {
   const { mutate: logout } = useLogout();
 
   return (
-    <header className="shrink-0 flex items-center gap-2.5 h-14 px-3 bg-background border-b border-border relative z-10">
+    <header className={styles.header}>
       <Button
         variant="ghost"
         size="icon"
-        className="size-8 rounded-full text-muted-foreground hover:text-foreground shrink-0"
+        className={styles.menuBtn}
         onClick={onMenuClick}
         aria-label="Open conversations"
       >
@@ -24,20 +25,20 @@ const EmptyChatPageHeader = ({ onMenuClick }: Props) => {
       </Button>
 
       {/* App branding */}
-      <div className="flex items-center gap-2 flex-1 min-w-0">
-        <Logo className="w-6 h-6 shrink-0" />
-        <span className="font-display font-black text-[0.9rem] tracking-[-0.01em] text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)]">
+      <div className={styles.branding}>
+        <Logo className={styles.logo} />
+        <span className={styles.brandName}>
           Sphere
         </span>
       </div>
 
       {/* Utility actions only — no contact-specific actions */}
-      <div className="flex items-center gap-0.5 shrink-0">
+      <div className={styles.actions}>
         <ThemeToggler />
         <Button
           variant="ghost"
           size="icon"
-          className="size-8 rounded-full text-muted-foreground hover:text-foreground"
+          className={styles.actionBtn}
           onClick={() => logout()}
           aria-label="Log out"
         >

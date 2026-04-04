@@ -6,6 +6,7 @@ import { loginFormSchema } from "@sphere/shared";
 import { Field, FieldError, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useLogin } from "@/hooks/useLogin";
+import styles from "./LoginForm.module.css";
 
 interface LoginFormProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,7 +26,7 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className={styles.root}>
       <form id="login-form" onSubmit={form.handleSubmit(onSubmit)}>
         <FieldGroup>
           <Controller
@@ -39,7 +40,7 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
                   autoComplete="username"
                   aria-invalid={fieldState.invalid}
                   placeholder="Email or username"
-                  className="h-13 rounded-xl text-sm px-4"
+                  className={styles.authInput}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -59,7 +60,7 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
                   autoComplete="current-password"
                   aria-invalid={fieldState.invalid}
                   placeholder="Password"
-                  className="h-13 rounded-xl text-sm px-4"
+                  className={styles.authInput}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -73,15 +74,15 @@ export default function LoginForm({ setIsLogin }: LoginFormProps) {
         disabled={isPending}
         type="submit"
         form="login-form"
-        className="w-full h-12 rounded-xl font-semibold text-base"
+        className={styles.submitBtn}
       >
         {isPending ? "Signing in..." : "Sign in"}
       </Button>
-      <p className="text-xs text-[oklch(0.50_0.04_322)] dark:text-[oklch(0.58_0.04_322)]">
+      <p className={styles.switchText}>
         Don't have an account?{" "}
         <Button
           variant="link"
-          className="text-xs font-semibold p-0 h-auto"
+          className={styles.switchLink}
           onClick={() => setIsLogin((prev) => !prev)}
         >
           Sign Up

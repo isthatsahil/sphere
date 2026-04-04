@@ -1,0 +1,106 @@
+@reference "../../index.css";
+
+.avatarSection {
+  @apply flex flex-col items-center gap-3;
+}
+
+.avatarTrigger {
+  @apply relative cursor-pointer rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+}
+
+.avatarImage {
+  @apply size-20;
+}
+
+.avatarFallback {
+  @apply text-white font-bold text-xl font-display tracking-tight bg-[oklch(0.833_0.145_321.434)];
+}
+
+.avatarOverlay {
+  @apply absolute inset-0 rounded-full bg-black/50 opacity-0 transition-opacity duration-200 grid place-items-center;
+}
+
+.avatarTrigger:hover .avatarOverlay,
+.avatarTrigger:focus-visible .avatarOverlay {
+  opacity: 1;
+}
+
+.avatarBadge {
+  @apply absolute -bottom-0.5 -right-0.5 size-6 rounded-full bg-primary grid place-items-center ring-2 ring-background transition-transform duration-150;
+}
+
+.avatarTrigger:hover .avatarBadge {
+  transform: scale(1.1);
+}
+
+.removeBtn {
+  @apply flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive transition-colors duration-150;
+}
+
+.form {
+  @apply px-5 py-6 grid gap-5;
+}
+
+.nameFieldGroup {
+  @apply grid grid-cols-2 gap-3;
+}
+
+.authInput {
+  @apply h-13 rounded-xl text-sm px-4;
+}
+
+.textareaInput {
+  @apply rounded-xl text-sm px-4 resize-none;
+}
+
+.dialogContent {
+  @apply p-0 gap-0 max-w-sm overflow-hidden rounded-2xl border-0 ring-1 ring-foreground/8 shadow-2xl;
+}
+
+.headerSection {
+  @apply relative px-5 pt-5 pb-4 border-b border-border;
+}
+
+.headerRow {
+  @apply flex items-start justify-between gap-4;
+}
+
+.dialogTitle {
+  @apply font-display text-[1.15rem] font-bold tracking-tight leading-tight;
+}
+
+.dialogDescription {
+  @apply mt-0.5 text-[12.5px] leading-snug;
+}
+
+.cancelBtn {
+  @apply shrink-0 mt-0.5 px-2.5 py-1 rounded-full bg-muted text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-150;
+}
+
+.submitBtn {
+  @apply w-full h-12 rounded-xl font-semibold text-base;
+}
+
+.submitWrapper {
+  @apply px-5 pb-5;
+}
+
+.drawerHeaderSection {
+  @apply relative border-b border-border;
+}
+
+.drawerHeader {
+  @apply relative flex-row items-start justify-between gap-4 px-5 pt-4 pb-4;
+}
+
+.drawerTitle {
+  @apply font-display text-[1.15rem] font-bold tracking-tight leading-tight text-left;
+}
+
+.drawerDescription {
+  @apply mt-0.5 text-[12.5px] leading-snug text-left;
+}
+
+.drawerFooter {
+  @apply px-5 pt-0 pb-6;
+}

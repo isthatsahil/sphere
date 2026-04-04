@@ -10,6 +10,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { getInitials } from "@/utils/utils";
+import styles from "./ChatPageHeader.module.css";
 
 interface Props {
   onMenuClick: () => void;
@@ -20,11 +21,11 @@ const ChatPageHeader = ({ onMenuClick }: Props) => {
   const { mutate: logout } = useLogout();
 
   return (
-    <header className="shrink-0 flex items-center gap-2.5 h-14 px-3 bg-background border-b border-border relative z-10">
+    <header className={styles.header}>
       <Button
         variant="ghost"
         size="icon"
-        className="size-8 rounded-full text-muted-foreground hover:text-foreground shrink-0"
+        className={styles.menuBtn}
         onClick={onMenuClick}
         aria-label="Open conversations"
       >
@@ -38,28 +39,28 @@ const ChatPageHeader = ({ onMenuClick }: Props) => {
           alt="user avatar"
           className="grayscale"
         />
-        <AvatarFallback className="text-[0.65rem] font-bold text-white bg-[oklch(0.833_0.145_321.434)]">
+        <AvatarFallback className={styles.avatarFallback}>
           {getInitials(selectedChatData?.username)}
         </AvatarFallback>
-        <AvatarBadge className="bg-green-600 dark:bg-green-800" />
+        <AvatarBadge className={styles.avatarBadge} />
       </Avatar>
 
       {/* Contact info */}
-      <div className="flex-1 min-w-0">
-        <p className="font-display font-black text-sm tracking-[-0.01em] leading-tight truncate text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)]">
+      <div className={styles.contactInfo}>
+        <p className={styles.contactName}>
           {selectedChatData?.username}
         </p>
-        <p className="text-[0.65rem] text-emerald-500 font-medium leading-tight">
+        <p className={styles.contactStatus}>
           online
         </p>
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-0.5 shrink-0">
+      <div className={styles.actions}>
         <Button
           variant="ghost"
           size="icon"
-          className="size-8 rounded-full text-muted-foreground hover:text-foreground"
+          className={styles.actionBtn}
           aria-label="Video call"
         >
           <Video className="size-4.25" />
@@ -67,7 +68,7 @@ const ChatPageHeader = ({ onMenuClick }: Props) => {
         <Button
           variant="ghost"
           size="icon"
-          className="size-8 rounded-full text-muted-foreground hover:text-foreground"
+          className={styles.actionBtn}
           aria-label="Voice call"
         >
           <Phone className="size-4.25" />
@@ -76,7 +77,7 @@ const ChatPageHeader = ({ onMenuClick }: Props) => {
         <Button
           variant="ghost"
           size="icon"
-          className="size-8 rounded-full text-muted-foreground hover:text-foreground"
+          className={styles.actionBtn}
           onClick={() => logout()}
           aria-label="Log out"
         >

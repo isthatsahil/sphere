@@ -1,0 +1,30 @@
+@reference "../index.css";
+
+.root {
+  @apply flex h-full w-full flex-col items-center justify-center gap-5 p-8 text-center;
+}
+
+.heading {
+  @apply font-display text-xl font-bold text-foreground;
+}
+
+.body {
+  @apply max-w-xs text-sm leading-relaxed text-muted-foreground;
+}
+
+.resetBtn {
+  composes: btn-auth from global;
+  @apply mt-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-95;
+}
+
+.details {
+  @apply mt-2 max-w-sm text-left;
+}
+
+.detailsSummary {
+  @apply cursor-pointer select-none text-xs text-muted-foreground/60 transition-colors hover:text-muted-foreground;
+}
+
+.detailsPre {
+  @apply mt-2 overflow-x-auto rounded-lg border border-border bg-muted p-3 text-xs text-muted-foreground;
+}

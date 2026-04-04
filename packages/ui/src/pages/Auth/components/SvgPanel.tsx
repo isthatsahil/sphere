@@ -1,10 +1,12 @@
+import styles from "./SvgPanel.module.css";
+
 const SvgAuthPanel = () => {
   return (
-    <div className="hidden md:flex md:w-[44%] lg:w-[46%] relative overflow-hidden">
+    <div className={styles.root}>
       <svg
         viewBox="0 0 480 700"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full"
+        className={styles.svg}
         preserveAspectRatio="xMidYMid slice"
         aria-hidden
       >

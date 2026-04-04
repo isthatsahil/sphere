@@ -1,0 +1,42 @@
+@reference "../../index.css";
+
+.root {
+  @apply flex h-screen w-screen overflow-hidden bg-background;
+}
+
+.formPanel {
+  @apply flex flex-col flex-1 px-10 sm:px-14 lg:px-16 py-10;
+}
+
+.logo {
+  @apply flex items-center gap-2.5;
+}
+
+.logoIcon {
+  @apply w-9 h-9 transition-transform duration-500 hover:rotate-15 hover:scale-110;
+}
+
+.logoText {
+  @apply font-display text-sm font-bold tracking-tight text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)];
+}
+
+.formArea {
+  @apply flex-1 flex flex-col justify-center max-w-95;
+}
+
+.headingBlock {
+  @apply mb-8;
+}
+
+.heading {
+  composes: auth-heading from global;
+  @apply font-display font-black leading-[1.02] tracking-tight mb-3 text-[oklch(0.18_0.05_322)] dark:text-[oklch(0.95_0.01_320)];
+}
+
+.subtitle {
+  @apply text-sm leading-relaxed text-[oklch(0.50_0.05_322)] dark:text-[oklch(0.58_0.04_322)];
+}
+
+.accent {
+  @apply h-px w-12 bg-[oklch(0.62_0.22_322)];
+}

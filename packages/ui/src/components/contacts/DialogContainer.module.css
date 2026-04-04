@@ -1,0 +1,5 @@
+@reference "../../index.css";
+
+.triggerBtn {
+  @apply size-8 rounded-full text-primary;
+}

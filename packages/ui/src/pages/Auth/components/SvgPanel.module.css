@@ -1,0 +1,9 @@
+@reference "../../../index.css";
+
+.root {
+  @apply hidden md:flex md:w-[44%] lg:w-[46%] relative overflow-hidden;
+}
+
+.svg {
+  @apply w-full h-full;
+}

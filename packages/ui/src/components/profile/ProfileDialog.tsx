@@ -30,6 +30,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Textarea } from "../ui/textarea";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useUpdateProfile } from "@/hooks/useUpdateProfile";
+import styles from "./ProfileDialog.module.css";
 
 interface Props {
   open: boolean;
@@ -58,26 +59,26 @@ function AvatarUpload({
   onRemove,
 }: AvatarUploadProps) {
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className={styles.avatarSection}>
       <div
         onClick={() => fileInputRef.current?.click()}
-        className="group relative cursor-pointer rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        className={styles.avatarTrigger}
         aria-label="Change profile picture"
       >
-        <Avatar className="size-20">
+        <Avatar className={styles.avatarImage}>
           <AvatarImage src={preview ?? avatarSrc} alt={fullName} />
-          <AvatarFallback className="text-white font-bold text-xl font-display tracking-tight bg-[oklch(0.833_0.145_321.434)]">
+          <AvatarFallback className={styles.avatarFallback}>
             {initials}
           </AvatarFallback>
         </Avatar>
 
         {/* Hover overlay */}
-        <div className="absolute inset-0 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 grid place-items-center">
+        <div className={styles.avatarOverlay}>
           <Camera className="size-5 text-white" />
         </div>
 
         {/* Edit badge */}
-        <span className="absolute -bottom-0.5 -right-0.5 size-6 rounded-full bg-primary grid place-items-center ring-2 ring-background group-hover:scale-110 transition-transform duration-150">
+        <span className={styles.avatarBadge}>
           <Camera className="size-3 text-white" />
         </span>
       </div>
@@ -87,7 +88,7 @@ function AvatarUpload({
           type="button"
           variant="ghost"
           onClick={onRemove}
-          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive transition-colors duration-150"
+          className={styles.removeBtn}
         >
           <X className="size-3" />
           Remove photo
@@ -138,7 +139,7 @@ function ProfileFormBody({
     <form
       id="profile-form"
       onSubmit={form.handleSubmit(onSubmit)}
-      className="px-5 py-6 grid gap-5"
+      className={styles.form}
     >
       <AvatarUpload
         preview={preview}
@@ -150,7 +151,7 @@ function ProfileFormBody({
         onRemove={onRemove}
       />
 
-      <FieldGroup className="grid grid-cols-2 gap-3">
+      <FieldGroup className={styles.nameFieldGroup}>
         <Controller
           name="firstName"
           control={form.control}
@@ -162,7 +163,7 @@ function ProfileFormBody({
                 id="firstName"
                 autoComplete="given-name"
                 aria-invalid={fieldState.invalid}
-                className="h-13 rounded-xl text-sm px-4"
+                className={styles.authInput}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -179,7 +180,7 @@ function ProfileFormBody({
                 id="lastName"
                 autoComplete="family-name"
                 aria-invalid={fieldState.invalid}
-                className="h-13 rounded-xl text-sm px-4"
+                className={styles.authInput}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -199,7 +200,7 @@ function ProfileFormBody({
                 placeholder={user?.bio || "Write about yourself."}
                 autoComplete="off"
                 aria-invalid={fieldState.invalid}
-                className="rounded-xl text-sm px-4 resize-none"
+                className={styles.textareaInput}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -286,7 +287,7 @@ const ProfileDialog = ({ open, onOpenChange }: Props) => {
     <Button
       variant="ghost"
       onClick={() => handleOpenChange(false)}
-      className="shrink-0 mt-0.5 px-2.5 py-1 rounded-full bg-muted text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-150"
+      className={styles.cancelBtn}
     >
       Cancel
     </Button>
@@ -297,7 +298,7 @@ const ProfileDialog = ({ open, onOpenChange }: Props) => {
       type="submit"
       form="profile-form"
       disabled={isPending || (!form.formState.isDirty && !selectedFile)}
-      className="w-full h-12 rounded-xl font-semibold text-base"
+      className={styles.submitBtn}
     >
       {isPending ? "Updating..." : "Update Profile"}
     </Button>
@@ -308,17 +309,17 @@ const ProfileDialog = ({ open, onOpenChange }: Props) => {
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent
           showCloseButton={false}
-          className="p-0 gap-0 max-w-sm overflow-hidden rounded-2xl border-0 ring-1 ring-foreground/8 shadow-2xl"
+          className={styles.dialogContent}
         >
-          <div className="relative px-5 pt-5 pb-4 border-b border-border">
+          <div className={styles.headerSection}>
             <div className="contact-dialog-glow pointer-events-none absolute inset-0" />
             <DialogHeader className="relative">
-              <div className="flex items-start justify-between gap-4">
+              <div className={styles.headerRow}>
                 <div>
-                  <DialogTitle className="font-display text-[1.15rem] font-bold tracking-tight leading-tight">
+                  <DialogTitle className={styles.dialogTitle}>
                     Your profile
                   </DialogTitle>
-                  <DialogDescription className="mt-0.5 text-[12.5px] leading-snug">
+                  <DialogDescription className={styles.dialogDescription}>
                     How others see you on Sphere
                   </DialogDescription>
                 </div>
@@ -328,7 +329,7 @@ const ProfileDialog = ({ open, onOpenChange }: Props) => {
           </div>
 
           <ProfileFormBody {...sharedFormProps} />
-          <div className="px-5 pb-5">{submitButton}</div>
+          <div className={styles.submitWrapper}>{submitButton}</div>
         </DialogContent>
       </Dialog>
     );
@@ -337,14 +338,14 @@ const ProfileDialog = ({ open, onOpenChange }: Props) => {
   return (
     <Drawer open={open} onOpenChange={handleOpenChange}>
       <DrawerContent className="max-h-[96dvh]">
-        <div className="relative border-b border-border">
+        <div className={styles.drawerHeaderSection}>
           <div className="contact-dialog-glow pointer-events-none absolute inset-0" />
-          <DrawerHeader className="relative flex-row items-start justify-between gap-4 px-5 pt-4 pb-4">
+          <DrawerHeader className={styles.drawerHeader}>
             <div>
-              <DrawerTitle className="font-display text-[1.15rem] font-bold tracking-tight leading-tight text-left">
+              <DrawerTitle className={styles.drawerTitle}>
                 Your profile
               </DrawerTitle>
-              <DrawerDescription className="mt-0.5 text-[12.5px] leading-snug text-left">
+              <DrawerDescription className={styles.drawerDescription}>
                 How others see you on Sphere
               </DrawerDescription>
             </div>
@@ -356,7 +357,7 @@ const ProfileDialog = ({ open, onOpenChange }: Props) => {
           <ProfileFormBody {...sharedFormProps} />
         </ScrollArea>
 
-        <DrawerFooter className="px-5 pt-0 pb-6">{submitButton}</DrawerFooter>
+        <DrawerFooter className={styles.drawerFooter}>{submitButton}</DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

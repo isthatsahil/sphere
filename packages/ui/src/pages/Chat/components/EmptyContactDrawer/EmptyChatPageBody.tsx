@@ -1,34 +1,35 @@
 import Logo from "@/assets/logo.svg?react";
 import { MoveLeft } from "lucide-react";
+import styles from "./EmptyChatPageBody.module.css";
 
 const EmptyChatPageBody = () => {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center relative overflow-hidden select-none">
+    <div className={styles.root}>
       {/* Ambient blobs — purely decorative, reduced motion respected */}
       <div className="chat-empty-blob-primary" aria-hidden="true" />
       <div className="chat-empty-blob-secondary" aria-hidden="true" />
 
       {/* Content */}
-      <div className="relative flex flex-col items-center gap-5 px-8 text-center">
+      <div className={styles.content}>
         {/* Logo halo */}
         <div className="auth-logo-halo">
           <Logo className="w-12 h-12 relative z-10" />
         </div>
 
         {/* Heading */}
-        <div className="flex flex-col gap-1.5">
-          <h2 className="font-display font-black text-2xl tracking-tight leading-none text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)]">
+        <div className={styles.headingGroup}>
+          <h2 className={styles.heading}>
             Your space.
           </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-55">
+          <p className={styles.subtitle}>
             Open the menu to pick up where you left off, or start something new.
           </p>
         </div>
 
         {/* Hint arrow pointing to menu */}
-        <div className="flex items-center gap-2 text-muted-foreground mt-1">
+        <div className={styles.hint}>
           <MoveLeft />
-          <span className="text-[0.7rem] font-medium tracking-wide">
+          <span className={styles.hintLabel}>
             conversations
           </span>
         </div>

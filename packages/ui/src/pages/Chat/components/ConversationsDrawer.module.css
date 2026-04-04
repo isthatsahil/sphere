@@ -1,0 +1,73 @@
+@reference "../../../index.css";
+
+.header {
+  @apply flex items-center justify-between h-14 px-4 border-b border-border shrink-0;
+}
+
+.title {
+  @apply font-display font-black text-base tracking-tight text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)];
+}
+
+.headerActions {
+  @apply flex items-center gap-1;
+}
+
+.closeBtn {
+  @apply size-8 rounded-full text-muted-foreground hover:text-foreground;
+}
+
+.searchWrapper {
+  @apply px-3 py-2 shrink-0;
+}
+
+.searchContainer {
+  @apply flex items-center gap-2 rounded-xl px-3 h-9 bg-[oklch(0.97_0.012_320)] dark:bg-[oklch(0.19_0.04_320)];
+}
+
+.searchIcon {
+  @apply size-3.5 text-muted-foreground shrink-0;
+}
+
+.searchInput {
+  @apply flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground;
+}
+
+.separatorWrapper {
+  @apply flex justify-center px-4;
+}
+
+.profileSection {
+  @apply py-4;
+}
+
+.profileBtn {
+  @apply flex items-center gap-3 px-4 py-3 w-full text-left hover:bg-accent/50 transition-colors duration-150 shrink-0;
+}
+
+.profileAvatar {
+  @apply size-9 shrink-0;
+}
+
+.profileAvatarFallback {
+  @apply text-[0.65rem] font-bold text-white bg-[oklch(0.833_0.145_321.434)];
+}
+
+.profileInfo {
+  @apply flex-1 min-w-0;
+}
+
+.profileName {
+  @apply font-display font-bold text-sm tracking-tight truncate leading-tight text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)];
+}
+
+.profileUsername {
+  @apply text-[0.65rem] text-muted-foreground truncate leading-tight;
+}
+
+.profileEditLabel {
+  @apply text-[0.65rem] font-medium text-muted-foreground opacity-0 transition-opacity duration-150 shrink-0;
+}
+
+.profileBtn:hover .profileEditLabel {
+  opacity: 1;
+}

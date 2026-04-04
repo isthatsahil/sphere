@@ -1,0 +1,73 @@
+@reference "../../../index.css";
+
+.scrollArea {
+  @apply flex-1 overflow-y-auto;
+}
+
+.messageList {
+  @apply flex flex-col gap-1 px-4 py-6;
+}
+
+.dateSeparator {
+  @apply flex items-center gap-3 mb-4;
+}
+
+.dateLine {
+  @apply flex-1 h-px bg-border;
+}
+
+.dateLabel {
+  @apply text-[0.65rem] text-muted-foreground font-medium uppercase tracking-wider;
+}
+
+.messageRow {
+  @apply flex items-end gap-2;
+}
+
+.messageRowReverse {
+  composes: messageRow;
+  @apply flex-row-reverse;
+}
+
+.messageRowGrouped {
+  @apply mt-0.5;
+}
+
+.messageRowUngrouped {
+  @apply mt-3;
+}
+
+.senderAvatar {
+  @apply w-6 h-6 rounded-full shrink-0 flex items-center justify-center bg-[oklch(0.833_0.145_321.434)];
+}
+
+.senderAvatarHidden {
+  composes: senderAvatar;
+  @apply invisible;
+}
+
+.senderInitial {
+  @apply text-[0.6rem] font-bold text-white;
+}
+
+.messageBubble {
+  @apply px-4 py-2.5 text-sm leading-relaxed max-w-[72%] wrap-break-word;
+}
+
+.messageSent {
+  composes: messageBubble;
+  @apply bg-primary text-primary-foreground rounded-2xl rounded-br-lg;
+}
+
+.messageReceived {
+  composes: messageBubble;
+  @apply rounded-2xl rounded-bl-lg text-foreground bg-[oklch(0.955_0.018_320)] dark:bg-[oklch(0.21_0.04_320)];
+}
+
+.readReceipt {
+  @apply flex justify-end mt-1;
+}
+
+.readReceiptText {
+  @apply text-[0.65rem] text-muted-foreground;
+}

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { registerFormSchema } from "@sphere/shared";
 import { useRegister } from "@/hooks/useRegister";
+import styles from "./RegisterForm.module.css";
 
 interface RegisterFormProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,7 +29,7 @@ const RegisterForm = ({ setIsLogin }: RegisterFormProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className={styles.root}>
       <form id="register-form" onSubmit={form.handleSubmit(onSubmit)}>
         <FieldGroup>
           <Controller
@@ -43,7 +44,7 @@ const RegisterForm = ({ setIsLogin }: RegisterFormProps) => {
                   autoComplete="email"
                   aria-invalid={fieldState.invalid}
                   placeholder="Email"
-                  className="h-13 rounded-xl text-sm px-4"
+                  className={styles.authInput}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -62,7 +63,7 @@ const RegisterForm = ({ setIsLogin }: RegisterFormProps) => {
                   autoComplete="username"
                   aria-invalid={fieldState.invalid}
                   placeholder="Username"
-                  className="h-13 rounded-xl text-sm px-4"
+                  className={styles.authInput}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -82,7 +83,7 @@ const RegisterForm = ({ setIsLogin }: RegisterFormProps) => {
                   autoComplete="new-password"
                   aria-invalid={fieldState.invalid}
                   placeholder="Password"
-                  className="h-13 rounded-xl text-sm px-4"
+                  className={styles.authInput}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -96,15 +97,15 @@ const RegisterForm = ({ setIsLogin }: RegisterFormProps) => {
         type="submit"
         disabled={isPending}
         form="register-form"
-        className="w-full h-12 rounded-xl font-semibold text-base"
+        className={styles.submitBtn}
       >
         {isPending ? "Creating account..." : "Create account"}
       </Button>
-      <p className="text-xs text-[oklch(0.50_0.04_322)] dark:text-[oklch(0.58_0.04_322)]">
+      <p className={styles.switchText}>
         Already have an account?{" "}
         <Button
           variant="link"
-          className="text-xs font-semibold p-0 h-auto"
+          className={styles.switchLink}
           onClick={() => setIsLogin((prev) => !prev)}
         >
           Sign In

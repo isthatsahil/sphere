@@ -7,6 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import styles from "./ConversationsList.module.css";
 
 interface Conversation {
   id: string;
@@ -27,21 +28,17 @@ interface Props {
 const ConversationsList = ({ conversations, onClose }: Props) => {
   return (
     <ScrollArea className="flex-1 overflow-y-auto">
-      <div className="py-1">
+      <div className={styles.list}>
         {conversations.map((conv, index) => (
           <div key={conv.id}>
             <Button
               variant="ghost"
               onClick={onClose}
-              className={`w-full h-auto flex items-center gap-3 px-4 py-3 rounded-none justify-start transition-colors hover:bg-[oklch(0.975_0.015_320)] dark:hover:bg-[oklch(0.18_0.04_320)] ${
-                conv.id === "1"
-                  ? "bg-[oklch(0.97_0.012_320)] dark:bg-[oklch(0.19_0.04_320)]"
-                  : ""
-              }`}
+              className={`${styles.conversationBtn} ${conv.id === "1" ? styles.conversationBtnActive : ""}`}
             >
-              <Avatar size="default" className={`w-11 h-11 rounded-full`}>
+              <Avatar size="default" className={styles.avatar}>
                 <AvatarImage src={conv.initials} />
-                <AvatarFallback className={`text-xs font-bold `}>
+                <AvatarFallback className="text-xs font-bold">
                   {conv.initials}
                 </AvatarFallback>
                 <AvatarBadge
@@ -54,37 +51,21 @@ const ConversationsList = ({ conversations, onClose }: Props) => {
               </Avatar>
 
               {/* Content */}
-              <div className="flex-1 min-w-0 text-left">
-                <div className="flex items-center justify-between gap-2">
-                  <span
-                    className={`text-sm font-display font-black tracking-tight truncate ${
-                      conv.unread > 0 ? "text-foreground" : "text-foreground/75"
-                    }`}
-                  >
+              <div className={styles.content}>
+                <div className={styles.contentHeader}>
+                  <span className={conv.unread > 0 ? styles.nameUnread : styles.nameRead}>
                     {conv.name}
                   </span>
-                  <span
-                    className={`text-[0.65rem] shrink-0 ${
-                      conv.unread > 0
-                        ? "text-primary font-semibold"
-                        : "text-muted-foreground"
-                    }`}
-                  >
+                  <span className={conv.unread > 0 ? styles.timeUnread : styles.timeRead}>
                     {conv.time}
                   </span>
                 </div>
-                <div className="flex items-center justify-between gap-2 mt-0.5">
-                  <span
-                    className={`text-xs truncate ${
-                      conv.unread > 0
-                        ? "text-foreground"
-                        : "text-muted-foreground"
-                    }`}
-                  >
+                <div className={styles.contentBody}>
+                  <span className={conv.unread > 0 ? styles.lastMsgUnread : styles.lastMsgRead}>
                     {conv.lastMsg}
                   </span>
                   {conv.unread > 0 && (
-                    <span className="shrink-0 w-4 h-4 bg-primary rounded-full flex items-center justify-center text-[0.6rem] text-primary-foreground font-bold">
+                    <span className={styles.unreadBadge}>
                       {conv.unread}
                     </span>
                   )}

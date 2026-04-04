@@ -2,6 +2,7 @@ import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import ContactDialog from "./components/ContactDialog";
+import styles from "./DialogContainer.module.css";
 
 type DialogContainerProps = {
   trigger?: (open: () => void) => React.ReactNode;
@@ -20,7 +21,7 @@ const DialogContainer = ({ trigger, onClose }: DialogContainerProps) => {
         <Button
           variant="ghost"
           size="icon"
-          className="size-8 rounded-full text-primary"
+          className={styles.triggerBtn}
           aria-label="New conversation"
           onClick={openDialog}
         >

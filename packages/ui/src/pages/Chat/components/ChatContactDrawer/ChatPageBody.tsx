@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useMountEffect } from "@/hooks/useMountEffect";
+import styles from "./ChatPageBody.module.css";
 
 const messages = [
   {
@@ -39,15 +40,15 @@ const ChatPageBody = () => {
   });
 
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="flex flex-col gap-1 px-4 py-6">
+    <div className={styles.scrollArea}>
+      <div className={styles.messageList}>
         {/* Date separator */}
-        <div className="flex items-center gap-3 mb-4">
-          <div className="flex-1 h-px bg-border" />
-          <span className="text-[0.65rem] text-muted-foreground font-medium uppercase tracking-wider">
+        <div className={styles.dateSeparator}>
+          <div className={styles.dateLine} />
+          <span className={styles.dateLabel}>
             Today
           </span>
-          <div className="flex-1 h-px bg-border" />
+          <div className={styles.dateLine} />
         </div>
 
         {messages.map((msg, i) => {
@@ -58,24 +59,16 @@ const ChatPageBody = () => {
           return (
             <div
               key={msg.id}
-              className={`flex items-end gap-2 ${isMe ? "flex-row-reverse" : ""} ${isGrouped ? "mt-0.5" : "mt-3"}`}
+              className={`${isMe ? styles.messageRowReverse : styles.messageRow} ${isGrouped ? styles.messageRowGrouped : styles.messageRowUngrouped}`}
             >
               {/* Sender avatar — only for first in a group */}
               {!isMe && (
-                <div
-                  className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center bg-[oklch(0.833_0.145_321.434)] ${isGrouped ? "invisible" : ""}`}
-                >
-                  <span className="text-[0.6rem] font-bold text-white">S</span>
+                <div className={isGrouped ? styles.senderAvatarHidden : styles.senderAvatar}>
+                  <span className={styles.senderInitial}>S</span>
                 </div>
               )}
 
-              <div
-                className={`px-4 py-2.5 text-sm leading-relaxed max-w-[72%] wrap-break-word ${
-                  isMe
-                    ? "bg-primary text-primary-foreground rounded-2xl rounded-br-lg"
-                    : "bg-[oklch(0.955_0.018_320)] dark:bg-[oklch(0.21_0.04_320)] text-foreground rounded-2xl rounded-bl-lg"
-                }`}
-              >
+              <div className={isMe ? styles.messageSent : styles.messageReceived}>
                 {msg.text}
               </div>
             </div>
@@ -83,8 +76,8 @@ const ChatPageBody = () => {
         })}
 
         {/* Read receipt */}
-        <div className="flex justify-end mt-1">
-          <span className="text-[0.65rem] text-muted-foreground">
+        <div className={styles.readReceipt}>
+          <span className={styles.readReceiptText}>
             seen · 7:47 PM
           </span>
         </div>

@@ -1,0 +1,37 @@
+@reference "../../../index.css";
+
+.header {
+  @apply shrink-0 flex items-center gap-2.5 h-14 px-3 bg-background border-b border-border relative z-10;
+}
+
+.menuBtn {
+  @apply size-8 rounded-full text-muted-foreground hover:text-foreground shrink-0;
+}
+
+.avatarFallback {
+  @apply text-[0.65rem] font-bold text-white bg-[oklch(0.833_0.145_321.434)];
+}
+
+.avatarBadge {
+  @apply bg-green-600 dark:bg-green-800;
+}
+
+.contactInfo {
+  @apply flex-1 min-w-0;
+}
+
+.contactName {
+  @apply font-display font-black text-sm tracking-[-0.01em] leading-tight truncate text-[oklch(0.22_0.06_322)] dark:text-[oklch(0.88_0.02_322)];
+}
+
+.contactStatus {
+  @apply text-[0.65rem] text-emerald-500 font-medium leading-tight;
+}
+
+.actions {
+  @apply flex items-center gap-0.5 shrink-0;
+}
+
+.actionBtn {
+  @apply size-8 rounded-full text-muted-foreground hover:text-foreground;
+}

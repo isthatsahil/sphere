@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
+import styles from "./ErrorBoundary.module.css";
 
 interface Props {
   children: ReactNode;
@@ -28,7 +29,7 @@ export class ErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) return this.props.fallback;
 
       return (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-5 p-8 text-center">
+        <div className={styles.root}>
           {/* Illustration — two message bubbles that drifted apart */}
           <div className="logo-float mb-2">
             <svg
@@ -74,12 +75,12 @@ export class ErrorBoundary extends Component<Props, State> {
           </div>
 
           {/* Heading */}
-          <p className="auth-enter-delay-1 font-display text-xl font-bold text-foreground">
+          <p className={`${styles.heading} auth-enter-delay-1`}>
             Something got tangled.
           </p>
 
           {/* Body */}
-          <p className="auth-enter-delay-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
+          <p className={`${styles.body} auth-enter-delay-2`}>
             This part of Sphere ran into an unexpected issue.
             <br />
             Try again and it should be fine.
@@ -88,18 +89,18 @@ export class ErrorBoundary extends Component<Props, State> {
           {/* Reset button */}
           <button
             onClick={this.reset}
-            className="btn-auth auth-enter-delay-2 mt-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:opacity-90 active:scale-95"
+            className={`${styles.resetBtn} auth-enter-delay-2`}
           >
             Try again
           </button>
 
           {/* Collapsible technical details — for curious/dev users */}
           {this.state.error && (
-            <details className="auth-enter-delay-2 mt-2 max-w-sm text-left">
-              <summary className="cursor-pointer select-none text-xs text-muted-foreground/60 transition-colors hover:text-muted-foreground">
+            <details className={`${styles.details} auth-enter-delay-2`}>
+              <summary className={styles.detailsSummary}>
                 Show details
               </summary>
-              <pre className="mt-2 overflow-x-auto rounded-lg border border-border bg-muted p-3 text-xs text-muted-foreground">
+              <pre className={styles.detailsPre}>
                 {this.state.error.message}
               </pre>
             </details>

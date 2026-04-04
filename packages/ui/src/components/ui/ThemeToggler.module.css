@@ -1,0 +1,5 @@
+@reference "../../index.css";
+
+.btn {
+  @apply size-8 rounded-full flex items-center justify-center transition-colors text-[oklch(0.50_0.04_322)] dark:text-[oklch(0.55_0.04_322)] hover:bg-[oklch(0.955_0.018_320)] dark:hover:bg-[oklch(0.22_0.04_320)];
+}

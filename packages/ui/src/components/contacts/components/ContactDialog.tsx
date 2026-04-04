@@ -19,6 +19,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { useChatStore } from "@/stores/chatStore";
+import styles from "./ContactDialog.module.css";
 
 type ContactDialogPropTypes = {
   openNewContactDialog: boolean;
@@ -68,18 +69,18 @@ const ContactDialog = ({
     <Dialog open={openNewContactDialog} onOpenChange={setOpenNewContactDialog}>
       <DialogContent
         showCloseButton={false}
-        className="p-0 gap-0 max-w-sm overflow-hidden rounded-2xl border-0 ring-1 ring-foreground/8 shadow-2xl"
+        className={styles.dialogContent}
       >
         {/* ── Header ── */}
-        <div className="relative px-5 pt-5 pb-4 border-b border-border">
+        <div className={styles.headerSection}>
           <div className="contact-dialog-glow pointer-events-none absolute inset-0" />
           <DialogHeader className="relative">
-            <div className="flex items-start justify-between gap-4">
+            <div className={styles.headerRow}>
               <div>
-                <DialogTitle className="font-display text-[1.15rem] font-bold tracking-tight leading-tight">
+                <DialogTitle className={styles.dialogTitle}>
                   New conversation
                 </DialogTitle>
-                <DialogDescription className="mt-0.5 text-[12.5px] leading-snug">
+                <DialogDescription className={styles.dialogDescription}>
                   Find someone to start chatting
                 </DialogDescription>
               </div>
@@ -87,7 +88,7 @@ const ContactDialog = ({
               <Button
                 variant="ghost"
                 onClick={() => setOpenNewContactDialog(false)}
-                className="shrink-0 mt-0.5 px-2.5 py-1 rounded-full bg-muted text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-150"
+                className={styles.cancelBtn}
               >
                 Cancel
               </Button>
